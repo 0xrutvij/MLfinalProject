@@ -4,6 +4,7 @@
 **Files in this Project:**
   
     dataProc - This is a preliminary analysis of the data, including histograms and simple curve fitting.
+    perceptron - Creates a perceptron model using batch gradient descent with RMSprop.
 
 
 **Sources:**

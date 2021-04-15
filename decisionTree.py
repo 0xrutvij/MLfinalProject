@@ -352,7 +352,7 @@ def createTestData(testData, df, SPECTmode=False):
 
 # function to compute the training and test results. If makeConfusion = 1, then
 # a confusion matrix will be produced
-def findResults(testResult, makeConfusion):
+def findResults(testResult):
 
     numMiss = 0
     numHit = 0
@@ -375,17 +375,15 @@ def findResults(testResult, makeConfusion):
 
     error = (numMiss*100)/(numMiss+numHit)
 
-    # If makeConfusion = 1, make a confusion matrix
-    if makeConfusion==1:
+    # make a confusion matrix
         '''
             PV ->
         AV    _P_ _N_
         | |P[TP][FN]      2|1
         V |N[FP][TN]      3|4
         '''
-
-        print(str(TP).rjust(3, '0'), '|', str(FN).rjust(3, '0'))
-        print(str(FP).rjust(3, '0'), '|', str(TN).rjust(3, '0'))
+    print(str(TP).rjust(3, '0'), '|', str(FN).rjust(3, '0'))
+    print(str(FP).rjust(3, '0'), '|', str(TN).rjust(3, '0'))
 
     return error
 
@@ -442,4 +440,4 @@ def plotErrors(trainingErrorList, testErrorList, monkNum, SPECTmode=False):
 def displayTable(trainingErrorList,testErrorList):
     trainingErrorList.insert(0, 'Training Error')
     testErrorList.insert(0, 'Test Error')
-    print(tabulate([['Depth',1,2,3,4,5,6,7,8,9,10], trainingErrorList, testErrorList]))
+    print(tabulate([['Depth',1,2], trainingErrorList, testErrorList]))

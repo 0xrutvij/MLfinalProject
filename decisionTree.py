@@ -1,7 +1,6 @@
 from typing import List
 import random
 from progress.bar import Bar
-import auxiliary as ax
 import math
 import pandas as pd
 import sys

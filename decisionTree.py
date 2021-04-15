@@ -3,6 +3,12 @@ import random
 from progress.bar import Bar
 import auxiliary as ax
 import math
+import pandas as pd
+import sys
+import graphviz
+import matplotlib.pyplot as plt
+import numpy as np
+from tabulate import tabulate
 
 class trainingExample:
     """docstring for trainingExample. A class to hold
@@ -50,7 +56,7 @@ def filterOn(attNo, attVal, td):
 class decisionTree:
     """docstring for decisionTree."""
 
-    def __init__(self, t: List[ax.trainingExample], maxDepth: int):
+    def __init__(self, t: List[trainingExample], maxDepth: int):
         #constructor for the decisionTree class
         #params are a list of training data and the max depth of the tree
 
@@ -87,7 +93,7 @@ class decisionTree:
         #a recursive class method to help train the decision tree.
 
         #create a new tree node
-        currNode = ax.treeNode()
+        currNode = treeNode()
 
         #the value of the node is supplied by the parent
         #if the node is a root node, the default value of None is used.
@@ -141,7 +147,7 @@ class decisionTree:
 
         for z in currFeatVals:
             #send only those data points which have the value z for the decidingFeature
-            td = ax.filterOn(currFeat, z, data)
+            td = filterOn(currFeat, z, data)
 
             #create a shallow copy of our set of features
             nfs = featureSet.copy()
@@ -202,7 +208,7 @@ class decisionTree:
 
         return ret
 
-    def testSingle(self, t: ax.trainingExample, node=None):
+    def testSingle(self, t: trainingExample, node=None):
         #a function to test a single test example
 
         #check if a val has been provided for the node param
@@ -240,10 +246,8 @@ class decisionTree:
                 #in such a case, we break the while loop.
                 break
 
-        #if we have exit the while loop, we return the following info
+        #if we exit the while loop, we return the following info
         return (currNode.label, t.label, currNode.label == t.label)
-
-
 
 
     def testBatch(self, data):
@@ -293,7 +297,7 @@ class decisionTree:
             for x in currFeatVals:
 
                 # create a subset of the data points which have the value x for the Feature
-                td = ax.filterOn(currFeat, x, data)
+                td = filterOn(currFeat, x, data)
                 valueCounts.append(len(td)) # how many data points have that value
 
                 # determine the new labelSet
@@ -334,3 +338,108 @@ class decisionTree:
             selectedFeat = featureSet[selectedFeatIndex]
 
             return selectedFeat
+        
+# function to create the training data
+def createTrainingData(trainingData, df, SPECTmode=False):
+
+
+    return trainingData
+
+# function to create the test data
+def createTestData(testData, df, SPECTmode=False):
+
+    return testData
+
+# function to compute the training and test results. If makeConfusion = 1, then
+# a confusion matrix will be produced
+def findResults(testResult, makeConfusion):
+
+    numMiss = 0
+    numHit = 0
+    FN = TN = TP = FP = 0
+
+    for x in testResult:
+
+        if(x[2]):
+            numHit+=1
+            if(x[0]):
+                TP+=1
+            else:
+                TN+=1
+        else:
+            numMiss+=1
+            if(x[0]):
+                FP+=1
+            else:
+                FN+=1
+
+    error = (numMiss*100)/(numMiss+numHit)
+
+    # If makeConfusion = 1, make a confusion matrix
+    if makeConfusion==1:
+        '''
+            PV ->
+        AV    _P_ _N_
+        | |P[TP][FN]      2|1
+        V |N[FP][TN]      3|4
+        '''
+
+        print(str(TP).rjust(3, '0'), '|', str(FN).rjust(3, '0'))
+        print(str(FP).rjust(3, '0'), '|', str(TN).rjust(3, '0'))
+
+    return error
+
+# function to create the decision tree and find the training and test errors
+# makeReport = 1 indicates that the tree needs to be printed and
+# a confusion matrix should be produced
+def trainAndTest(trainingData, x, testData, makeReport):
+
+    # create the decision tree
+    someTree = dt.decisionTree(trainingData, x)
+
+    # train the tree
+    someTree.train()
+
+    if makeReport == 1:
+        print('Decision Tree of Depth', x)
+        print(str(someTree))
+
+    # find training error and make confusion matrix if needed
+    testResult = someTree.testBatch(trainingData)
+    if makeReport ==1:
+        print('The Confusion Maxtrix on the Training Set for Depth of ', x, ':')
+    trainingError = findResults(testResult, makeReport)
+
+    # find test error and make confusion matrix if needed
+    testResult2 = someTree.testBatch(testData)
+    if makeReport ==1:
+        print('The Confusion Maxtrix on the Test Set for Depth of ', x, ':')
+    testError = findResults(testResult2, makeReport)
+
+    List = [trainingError, testError]
+
+    return List
+
+# plotting training and testing error curves together
+# with tree depth on the x-axis and error on the y-axis
+def plotErrors(trainingErrorList, testErrorList, monkNum, SPECTmode=False):
+    plt.plot(np.arange(1,11,1),trainingErrorList, label = 'Training Error')
+    plt.plot(np.arange(1,11,1),testErrorList, label = 'Test Error')
+    plt.xlabel('Depth')
+    plt.ylabel('Errors')
+    if SPECTmode:
+        title = 'Training and Testing Error Curves for SPECT data'
+        save_file = 'SPECT.png'
+    else:
+        title = 'Training and Testing Error Curves for Monk' + monkNum
+        save_file = 'Monk' + monkNum + '.png'
+    plt.title(title)
+    plt.legend()
+    plt.savefig('plots/'+save_file, bbox_inches='tight')
+    plt.show()
+
+# function to display the table of training and test errors per depth
+def displayTable(trainingErrorList,testErrorList):
+    trainingErrorList.insert(0, 'Training Error')
+    testErrorList.insert(0, 'Test Error')
+    print(tabulate([['Depth',1,2,3,4,5,6,7,8,9,10], trainingErrorList, testErrorList]))

@@ -22,11 +22,12 @@ class perceptronModel:
   # get prediction by constructing a linear function
   def findPred(self,weights,bias):
     
-    pred = -1
+    pred = pd.DataFrame(np.ones(self.numOfSamples+1))
     f = (self.input.dot(weights))+bias
     
-    if f >= 0:
-      pred = 1
+    for i in range(0,pred.shape[0]):
+      if f.iloc[i] < 0:
+        pred.iloc[i] = -1
 
     return pred
   
@@ -34,9 +35,13 @@ class perceptronModel:
   def findPartial(self,ywx):
     partial = pd.DataFrame(np.zeros(self.numOfAtts+1))
     
-    for i in range(
-    if ywx < 0:
-      partial = 
+    # for every data point
+    for i in range(0,self.input.shape[0]):
+    
+      if ywx.iloc[i] < 0:
+        for j in range(0,self.partial.shape[0]):
+          partial.iloc[i] = partial.iloc[i] - self.input
+    
     return partial
     
   # preform the RMSprop batch gradient descent
@@ -58,7 +63,7 @@ class perceptronModel:
       pred = self.findPred(weights,bias)
       
       # use the modified hinge loss/ perceptron criteria
-      ywx = pred*self.output)[0]
+      ywx = (pred*self.output)[0]
       maximum = np.maximum((-ywx,0)
       avgLoss = sum(maximum)/(self.numOfSamples)
 

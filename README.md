@@ -10,6 +10,7 @@
   
     Here are all the articles/materials used
     
-    https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9 - Used to gain information about RMSprop addition to Gradient descent.
+    https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9
+      Used to gain information about RMSprop addition to Gradient descent.
   
   

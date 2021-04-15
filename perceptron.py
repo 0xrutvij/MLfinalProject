@@ -29,13 +29,22 @@ class perceptronModel:
       pred = 1
 
     return pred
-
+  
+  # find the partial derivative of J
+  def findPartial(self,ywx):
+    partial = pd.DataFrame(np.zeros(self.numOfAtts+1))
+    
+    for i in range(
+    if ywx < 0:
+      partial = 
+    return partial
+    
   # preform the RMSprop batch gradient descent
   def gradientDescent(self):
     
     # initialize the parameters
     weightsTemp = pd.DataFrame(np.zeros(self.numOfAtts))
-    alpha = .001 # step size
+    eta = .001 # step size
     v = pd.DataFrame(np.zeros(self.numOfAtts+1))
     beta = 0.9
     ep = .0001
@@ -61,11 +70,11 @@ class perceptronModel:
         v.iloc[i] = beta*v.iloc[i] + (1-beta)*((partial[i])**2)
       
       # find new bias parameter
-      biasTemp = bias - (alpha/(v.iloc[0]+ep)**0.5)*partial[0]
+      biasTemp = bias - (eta/(v.iloc[0]+ep)**0.5)*partial[0]
 
       # find new weights parameters
       for i in range(0,self.numOfAtts): 
-        weightsTemp.iloc[i] = weights.iloc[i] - (alpha/(v.iloc[i+1]+ep)**0.5)*partial[i+1]
+        weightsTemp.iloc[i] = weights.iloc[i] - (eta/(v.iloc[i+1]+ep)**0.5)*partial[i+1]
 
       # Update parameters
       bias = biasTemp

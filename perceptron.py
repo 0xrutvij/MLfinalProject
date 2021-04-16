@@ -10,20 +10,19 @@ class perceptronModel:
 
   # Constructor method with instance variables
   def __init__(self, input, output):
-    self.input = input
+    self.input = input # each example is of the form <1,x1,x2,...,xn>
     self.output = output
     self.numOfSamples = input.shape[0]
     self.numOfAtts = input.shape[1]
     
     # randomly initialize the weights close to zero
-    self.finalBias = np.random.normal(0,1,1)
     self.finalWeights = pd.DataFrame(np.random.rand(self.numOfAtts))
 
   # get prediction by constructing a linear function
   def findPred(self,weights,bias):
     
-    pred = pd.DataFrame(np.ones(self.numOfSamples+1))
-    f = (self.input.dot(weights))+bias
+    pred = pd.DataFrame(np.ones(self.numOfSamples))
+    f = (self.input.dot(weights))
     
     for i in range(0,pred.shape[0]):
       if f.iloc[i] < 0:
@@ -33,14 +32,18 @@ class perceptronModel:
   
   # find the partial derivative of J
   def findPartial(self,ywx):
-    partial = pd.DataFrame(np.zeros(self.numOfAtts+1))
+    partial = pd.DataFrame(np.zeros(self.numOfAtts))
     
     # for every data point
     for i in range(0,self.input.shape[0]):
+      
+      xi = self.input.iloc[i]
     
       if ywx.iloc[i] < 0:
-        for j in range(0,self.partial.shape[0]):
-          partial.iloc[i] = partial.iloc[i] - self.input
+        for j in range(0, xi.shape[0]):
+          partial.iloc[j] = partial.iloc[j] - self.input[j]*self.output.iloc[j]
+    
+    partial.multiply(self.numOfSamples)
     
     return partial
     

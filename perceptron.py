@@ -116,6 +116,7 @@ class perceptronModel:
 #if __name__ == "__main__":
   
   # load the data
+  df = pd.read_csv('/bank_note.csv')
   # train_input = ...
   # train_output = ...
   # test_input = ..

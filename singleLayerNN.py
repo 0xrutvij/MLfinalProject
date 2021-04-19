@@ -174,89 +174,90 @@ def do_backprop(eta,max_epoch):
   print("")
 
 # the main
+if __name__ == '__main__':
 
-# importing the dataset
-data = obtainData()
+  # importing the dataset
+  data = obtainData()
 
-# obtaining the training data, which will be 80% of the entire data
-trainingData = data.iloc[0:int(data.shape[0]*.8), :]
-train_input = trainingData.drop(columns=[trainingData.shape[1]-1])
-train_output = trainingData[trainingData.shape[1]-1]
+  # obtaining the training data, which will be 80% of the entire data
+  trainingData = data.iloc[0:int(data.shape[0]*.8), :]
+  train_input = trainingData.drop(columns=[trainingData.shape[1]-1])
+  train_output = trainingData[trainingData.shape[1]-1]
 
-# obtaining the test data, which will be 20% of the entire data
-testData = data.iloc[trainingData.shape[0]:data.shape[0]-1, :]
-test_input = testData.drop(columns=[testData.shape[1]-1])
-test_output = testData[testData.shape[1]-1]
+  # obtaining the test data, which will be 20% of the entire data
+  testData = data.iloc[trainingData.shape[0]:data.shape[0]-1, :]
+  test_input = testData.drop(columns=[testData.shape[1]-1])
+  test_output = testData[testData.shape[1]-1]
 
-# Construct Network using various parameters
-max_epoch = 100
-print("Maxium epoch is: ")
-print(max_epoch)
-print("")
-eta = 1
-print("For eta = 1")
-do_backprop(eta,max_epoch)
-print("")
+  # Construct Network using various parameters
+  max_epoch = 100
+  print("Maxium epoch is: ")
+  print(max_epoch)
+  print("")
+  eta = 1
+  print("For eta = 1")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.1
-print("For eta = 0.1")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.1
+  print("For eta = 0.1")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.01
-print("For eta = 0.01")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.01
+  print("For eta = 0.01")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.001
-print("For eta = 0.001")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.001
+  print("For eta = 0.001")
+  do_backprop(eta,max_epoch)
+  print("")
 
-max_epoch = 50
-print("Maxium epoch is: ")
-print(max_epoch)
-print("")
-eta = 1
-print("For eta = 1")
-do_backprop(eta,max_epoch)
-print("")
+  max_epoch = 50
+  print("Maxium epoch is: ")
+  print(max_epoch)
+  print("")
+  eta = 1
+  print("For eta = 1")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.1
-print("For eta = 0.1")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.1
+  print("For eta = 0.1")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.01
-print("For eta = 0.01")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.01
+  print("For eta = 0.01")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.001
-print("For eta = 0.001")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.001
+  print("For eta = 0.001")
+  do_backprop(eta,max_epoch)
+  print("")
 
-max_epoch = 100
-print("Maxium epoch is: ")
-print(max_epoch)
-print("")
-eta = 1
-print("For eta = 1")
-do_backprop(eta,max_epoch)
-print("")
+  max_epoch = 100
+  print("Maxium epoch is: ")
+  print(max_epoch)
+  print("")
+  eta = 1
+  print("For eta = 1")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.1
-print("For eta = 0.1")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.1
+  print("For eta = 0.1")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.01
-print("For eta = 0.01")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.01
+  print("For eta = 0.01")
+  do_backprop(eta,max_epoch)
+  print("")
 
-eta = 0.001
-print("For eta = 0.001")
-do_backprop(eta,max_epoch)
-print("")
+  eta = 0.001
+  print("For eta = 0.001")
+  do_backprop(eta,max_epoch)
+  print("")

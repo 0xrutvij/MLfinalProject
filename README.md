@@ -5,7 +5,8 @@
   
     dataProc - This is a preliminary analysis of the data, including histograms and simple curve fitting.
     perceptron - Creates a perceptron model using batch gradient descent with RMSprop.
-    binTreeMain - An emsemble of binary decision trees implementing bagging and Adaboost. 
+    binTreeMain - An emsemble of binary decision trees implementing bagging and Adaboost.
+    SingleLayerNN - A simple neural network with options of sigmoid, tanh, and ReLu for the activation function and that uses RMSProp
 
 
 **Sources:**

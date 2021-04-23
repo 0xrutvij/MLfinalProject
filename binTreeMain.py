@@ -405,6 +405,18 @@ def compute_error(y_true, y_pred):
 
     print(str(TP).rjust(3, '0'), '|', str(FN).rjust(3, '0'))
     print(str(FP).rjust(3, '0'), '|', str(TN).rjust(3, '0'))
+    # Precision indicates how accurate a model is for positive preds.
+    # Useful when the cost of a false positive is high. Higher precision means lower FP
+    p = TP/(TP+FP)
+    print('Precision:', p)
+    # Recall indicates how many of the models positive predictions are actually correct
+    # Useful when the cost of a false negative is high. Higher recall means lower FN.
+    r = TP/(TP+FN)
+    print('Recall:', r)
+    # F1 Score balances both precision and recall. For models that have class imbalance
+    # and a large number of TNs contribute to the accuracy, thus F1 focuses more on
+    # TP vs FN/FP.
+    print('F1 Score:', (2*r*p)/(r+p))
 
     return error
 
@@ -456,6 +468,17 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
         print('Test Error = {0:4.2f}%.'.format(tst_err * 100))
         print('CPU Runtime: {0}'.format(end))
 
+    if option == 5:
+        tree = id3(np.transpose(xtrn), ytrn, attribute_value_pairs=attribute_value_pairs, max_depth=bag_size)
+        model = [[1, tree]]
+        y_pred = [predict_example(x, model) for x in xtest]
+        modelName = 'Decision Tree Classifier, '
+        numberOf = 'max depth of the tree:'
+        print(modelName, numberOf, bag_size)
+        tst_err = compute_error(list(ytest), y_pred)
+        print('Test Error = {0:4.2f}%.'.format(tst_err * 100))
+
+
 
 
 if __name__ == '__main__':
@@ -490,18 +513,19 @@ if __name__ == '__main__':
 
     # Construct and test four bagging models for each combination of maximum depth d = 3, 5 and bag size = 10, 20
     construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 5, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=20)
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 5, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=20)
+    #construct_eval_model(xtrn, ytrn, xtest, ytest, 5, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+    #construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=20)
+    #construct_eval_model(xtrn, ytrn, xtest, ytest, 5, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=20)
     # Construct and test four boosting models for each combination of maximum depth d = 1, 2 and bag size = 20, 40
     construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=20)
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 2, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=20)
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=40)
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 2, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=40)
-
+    #construct_eval_model(xtrn, ytrn, xtest, ytest, 2, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=20)
+    #construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=40)
+    #construct_eval_model(xtrn, ytrn, xtest, ytest, 2, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=40)
+    construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 5, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
 
     # Use scikit-learn’s bagging and AdaBoost learners and repeat the experiments above
     # Bagging
+    '''
     construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 3, option = 2, bag_size=10)
     construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 5, option = 2, bag_size=10)
     construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 3, option = 2, bag_size=20)
@@ -511,3 +535,4 @@ if __name__ == '__main__':
     construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 2, option = 3, bag_size=20)
     construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 1, option = 3, bag_size=40)
     construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 2, option = 3, bag_size=40)
+    '''

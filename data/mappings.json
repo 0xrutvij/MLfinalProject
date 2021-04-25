@@ -1,0 +1,32 @@
+{
+    "delayThresholdMapping": {
+        "thresholdVals": [
+            8,
+            32,
+            141,
+            255
+        ],
+        "delay <= 8": 0,
+        "8 < delay <= 32": 1,
+        "32 < delay <= 141": 2,
+        "141 < delay <= 255": 3
+    },
+    "deviceIdToIntMapping": {
+        "012D": 0,
+        "01BA": 1,
+        "9328": 2,
+        "481F": 3
+    },
+    "counterThresholdMapping": {
+        "thresholdVals": [
+            7,
+            17,
+            28,
+            116
+        ],
+        "counter <= 7": 0,
+        "7 < counter <= 17": 1,
+        "17 < counter <= 28": 2,
+        "28 < counter <= 116": 3
+    }
+}

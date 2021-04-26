@@ -21,7 +21,7 @@ import numpy as np
 from dateutil import parser
 import json
 
-preFix = './rawData/cb-devices-main('
+preFix = '../rawData/cb-devices-main('
 postFix = ').csv'
 files = []
 dfList = []
@@ -115,7 +115,7 @@ deviceIdToIntMapping = {}
 
 for i, id in enumerate(setOfDevicesContacted):
     df1 = grouped.get_group(id)
-    df1.to_csv('./processedData/' + id + '.csv')
+    df1.to_csv('../processedData/' + id + '.csv')
     df.loc[df['contact_id'] == id, 'contact_id'] = i
     deviceIdToIntMapping[id] = i
 
@@ -129,7 +129,7 @@ mappings = {
     'counterThresholdMapping':counterThresholdMapping
     }
 
-with open('./processedData/mappings.json', 'w') as output:
+with open('../processedData/mappings.json', 'w') as output:
     json.dump(mappings, output, indent=4)
 
-df.to_csv('./processedData/aggregatedAndProcessed.csv')
+df.to_csv('../processedData/aggregatedAndProcessed.csv')

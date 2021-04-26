@@ -3,11 +3,12 @@ import numpy as np
 from collections import Counter
 from imblearn.under_sampling import RandomUnderSampler as RUS
 from imblearn.under_sampling import TomekLinks as TL
+from imblearn.under_sampling import NearMiss as NM
 from sklearn.model_selection import train_test_split as tts
 
-DEBUG = True
+DEBUG = False
 
-df = pd.read_csv('./processedData/aggregatedAndProcessed.csv')
+df = pd.read_csv('../processedData/aggregatedAndProcessed.csv')
 
 df = df[['contact_type', 'contact_class_score_diff', 'contact_id','counter', 'delay']]
 
@@ -46,9 +47,9 @@ xRUStrain, xRUStest, yRUStrain, yRUStest = tts(xRUS, yRUS, test_size=0.25, rando
 
 # save the training and test data into their respective files.
 M = np.column_stack([yRUStrain,xRUStrain])
-np.savetxt('./learningData/RUStrain.csv', M, delimiter=',', fmt='%d')
+np.savetxt('../learningData/RUStrain.csv', M, delimiter=',', fmt='%d')
 M = np.column_stack([yRUStest,xRUStest])
-np.savetxt('./learningData/RUStest.csv', M, delimiter=',', fmt='%d')
+np.savetxt('../learningData/RUStest.csv', M, delimiter=',', fmt='%d')
 
 
 
@@ -72,6 +73,32 @@ xTLtrain, xTLtest, yTLtrain, yTLtest = tts(xTL, yTL, test_size=0.25, random_stat
 
 # save the training and test data into their respective files.
 M = np.column_stack([yTLtrain,xTLtrain])
-np.savetxt('./learningData/TLtrain.csv', M, delimiter=',', fmt='%d')
+np.savetxt('../learningData/TLtrain.csv', M, delimiter=',', fmt='%d')
 M = np.column_stack([yTLtest,xTLtest])
-np.savetxt('./learningData/TLtest.csv', M, delimiter=',', fmt='%d')
+np.savetxt('../learningData/TLtest.csv', M, delimiter=',', fmt='%d')
+
+
+
+##########################
+##     Near Miss        ##
+##########################
+
+# create the near miss undersampler object, use version 2. [Note: version 3 fails, add explanation]
+sampler3 = NM(version=2)
+
+# near miss undersampling
+xNM, yNM = sampler3.fit_resample(x,y)
+
+if DEBUG:
+    print(xNM.shape)
+    print(yNM.shape)
+    print(sorted(Counter(yNM).items()))
+
+# split into training and test data 75/25 split
+xNMtrain, xNMtest, yNMtrain, yNMtest = tts(xNM, yNM, test_size=0.25, random_state=6375)
+
+# save the training and test data into their respective files.
+M = np.column_stack([yNMtrain,xNMtrain])
+np.savetxt('../learningData/NMtrain.csv', M, delimiter=',', fmt='%d')
+M = np.column_stack([yNMtest,xNMtest])
+np.savetxt('../learningData/NMtest.csv', M, delimiter=',', fmt='%d')

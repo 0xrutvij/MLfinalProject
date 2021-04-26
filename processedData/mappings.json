@@ -12,10 +12,10 @@
         "141 < delay <= 255": 3
     },
     "deviceIdToIntMapping": {
-        "012D": 0,
+        "481F": 0,
         "01BA": 1,
-        "9328": 2,
-        "481F": 3
+        "012D": 2,
+        "9328": 3
     },
     "counterThresholdMapping": {
         "thresholdVals": [

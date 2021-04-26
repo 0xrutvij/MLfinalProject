@@ -2,33 +2,39 @@
 
 
 **Files in this Project:**
-  
+
     dataProc - This is a preliminary analysis of the data, including histograms and simple curve fitting.
     perceptron - Creates a perceptron model using batch gradient descent with RMSprop.
     binTreeMain - An emsemble of binary decision trees implementing bagging and Adaboost.
     SingleLayerNN - A simple neural network with options of sigmoid, tanh, and ReLu for the activation function and that uses RMSProp
-    
+
 
 ```
+.
 ├── README.md
-├── bank_note.csv
-├── binTreeMain.py
-├── dataProc.ipynb
-├── dataProc.py
+├── dataManipulation
+│   ├── dataProc.ipynb
+│   ├── dataProc.py
+│   └── undersamp.py
 ├── learningData
+│   ├── NMtest.csv
+│   ├── NMtrain.csv
 │   ├── RUStest.csv
 │   ├── RUStrain.csv
 │   ├── TLtest.csv
 │   └── TLtrain.csv
-├── output.txt
-├── p2data
-│   ├── mushroom.csv
-│   ├── mushroom.m
-│   ├── mushroom.test
-│   ├── mushroom.train
-│   ├── mushroom_analyze.m
-│   └── mushroom_tree.PNG
-├── perceptron.py
+├── models
+│   ├── bank_note.csv
+│   ├── binTreeMain.py
+│   ├── p2data
+│   │   ├── mushroom.csv
+│   │   ├── mushroom.m
+│   │   ├── mushroom.test
+│   │   ├── mushroom.train
+│   │   ├── mushroom_analyze.m
+│   │   └── mushroom_tree.PNG
+│   ├── perceptron.py
+│   └── singleLayerNN.py
 ├── processedData
 │   ├── 012D.csv
 │   ├── 01BA.csv
@@ -48,19 +54,17 @@
 │   ├── cb-devices-main(8).csv
 │   └── cb-devices-main(9).csv
 ├── researchGuide.pdf
-├── singleLayerNN.py
-└── undersamp.py
+└── rocExp.py
+
 ```
 
 
 **Sources:**
-  
+
     Here are all the articles/materials used
-    
+
     https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9
       Used to gain information about RMSprop addition to Gradient descent.
-      
+
     https://www.analyticsvidhya.com/blog/2020/07/10-techniques-to-deal-with-class-imbalance-in-machine-learning/
       Used to explain some resampling techniques to help with class imbalance.
-  
-  

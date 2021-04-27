@@ -15,26 +15,33 @@
 ├── dataManipulation
 │   ├── dataProc.ipynb
 │   ├── dataProc.py
+│   ├── oversamp.py
 │   └── undersamp.py
 ├── learningData
 │   ├── NMtest.csv
 │   ├── NMtrain.csv
+│   ├── ROStest.csv
+│   ├── ROStrain.csv
 │   ├── RUStest.csv
 │   ├── RUStrain.csv
+│   ├── SMOTEtest.csv
+│   ├── SMOTEtrain.csv
 │   ├── TLtest.csv
 │   └── TLtrain.csv
 ├── models
 │   ├── bank_note.csv
+│   ├── binTree.py
 │   ├── binTreeMain.py
-│   ├── p2data
-│   │   ├── mushroom.csv
-│   │   ├── mushroom.m
-│   │   ├── mushroom.test
-│   │   ├── mushroom.train
-│   │   ├── mushroom_analyze.m
-│   │   └── mushroom_tree.PNG
+│   ├── ensembles.py
 │   ├── perceptron.py
-│   └── singleLayerNN.py
+│   ├── singleLayerNN.py
+│   └── utils.py
+├── output
+│   ├── outputNM.txt
+│   ├── outputROS.txt
+│   ├── outputRUS.txt
+│   ├── outputSMOTE.txt
+│   └── outputTL.txt
 ├── processedData
 │   ├── 012D.csv
 │   ├── 01BA.csv
@@ -55,6 +62,7 @@
 │   └── cb-devices-main(9).csv
 ├── researchGuide.pdf
 └── rocExp.py
+
 
 ```
 

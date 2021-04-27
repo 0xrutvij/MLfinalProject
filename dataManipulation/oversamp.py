@@ -5,6 +5,7 @@ from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split as tts
 
 DEBUG = False
+TEST_SIZE = 0.30
 
 # load the data
 df = pd.read_csv('../processedData/aggregatedAndProcessed.csv')
@@ -38,7 +39,7 @@ sampler1 = ROS(random_state=6375)
 xROS, yROS = sampler1.fit_resample(x, y)
 
 # split into training and test data 75/25 split
-xROStrain, xROStest, yROStrain, yROStest = tts(xROS, yROS, test_size=0.25, random_state=6375)
+xROStrain, xROStest, yROStrain, yROStest = tts(xROS, yROS, test_size=TEST_SIZE, random_state=6375)
 
 # save the training and test data into their respective files.
 M = np.column_stack([yROStrain,xROStrain])
@@ -59,7 +60,7 @@ smoteClass = SMOTE()
 xSMOTE, ySMOTE = smoteClass.fit_resample(x, y)
 
 # split into training and test data 75/25 split
-xSMOTEtrain, xSMOTEtest, ySMOTEtrain, ySMOTEtest = tts(xSMOTE, ySMOTE, test_size=0.25, random_state=6375)
+xSMOTEtrain, xSMOTEtest, ySMOTEtrain, ySMOTEtest = tts(xSMOTE, ySMOTE, test_size=TEST_SIZE, random_state=6375)
 
 # save the training and test data into their respective files.
 M = np.column_stack([ySMOTEtrain,xSMOTEtrain])

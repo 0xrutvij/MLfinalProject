@@ -7,6 +7,7 @@ from imblearn.under_sampling import NearMiss as NM
 from sklearn.model_selection import train_test_split as tts
 
 DEBUG = False
+TEST_SIZE = 0.30
 
 df = pd.read_csv('../processedData/aggregatedAndProcessed.csv')
 
@@ -27,6 +28,21 @@ wholeSet = df.to_numpy()
 y = wholeSet[:, 0]
 x = wholeSet[:, 1:]
 
+
+##########################
+##     Direct Split     ##
+##########################
+
+# split into training and test data 75/25 split
+xDStrain, xDStest, yDStrain, yDStest = tts(x, y, test_size=TEST_SIZE, random_state=6375)
+
+# save the training and test data into their respective files.
+M = np.column_stack([yDStrain,xDStrain])
+np.savetxt('../learningData/DStrain.csv', M, delimiter=',', fmt='%d')
+M = np.column_stack([yDStest,xDStest])
+np.savetxt('../learningData/DStest.csv', M, delimiter=',', fmt='%d')
+
+
 ##########################
 ## Random Undersampling ##
 ##########################
@@ -43,7 +59,7 @@ if DEBUG:
     print(sorted(Counter(yRUS).items()))
 
 # split into training and test data 75/25 split
-xRUStrain, xRUStest, yRUStrain, yRUStest = tts(xRUS, yRUS, test_size=0.25, random_state=6375)
+xRUStrain, xRUStest, yRUStrain, yRUStest = tts(xRUS, yRUS, test_size=TEST_SIZE, random_state=6375)
 
 # save the training and test data into their respective files.
 M = np.column_stack([yRUStrain,xRUStrain])
@@ -69,7 +85,7 @@ if DEBUG:
     print(sorted(Counter(yTL).items()))
 
 # split into training and test data 75/25 split
-xTLtrain, xTLtest, yTLtrain, yTLtest = tts(xTL, yTL, test_size=0.25, random_state=6375)
+xTLtrain, xTLtest, yTLtrain, yTLtest = tts(xTL, yTL, test_size=TEST_SIZE, random_state=6375)
 
 # save the training and test data into their respective files.
 M = np.column_stack([yTLtrain,xTLtrain])
@@ -95,7 +111,7 @@ if DEBUG:
     print(sorted(Counter(yNM).items()))
 
 # split into training and test data 75/25 split
-xNMtrain, xNMtest, yNMtrain, yNMtest = tts(xNM, yNM, test_size=0.25, random_state=6375)
+xNMtrain, xNMtest, yNMtrain, yNMtest = tts(xNM, yNM, test_size=TEST_SIZE, random_state=6375)
 
 # save the training and test data into their respective files.
 M = np.column_stack([yNMtrain,xNMtrain])

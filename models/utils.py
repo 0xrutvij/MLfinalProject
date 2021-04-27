@@ -108,15 +108,27 @@ def compute_error(y_true, y_pred):
     print(str(FP).rjust(3, '0'), '|', str(TN).rjust(3, '0'))
     # Precision indicates how accurate a model is for positive preds.
     # Useful when the cost of a false positive is high. Higher precision means lower FP
-    p = TP/(TP+FP)
+    if TP+FP == 0:
+        p = 0
+    else:
+        p = TP/(TP+FP)
     print('Precision:', p)
     # Recall indicates how many of the models positive predictions are actually correct
     # Useful when the cost of a false negative is high. Higher recall means lower FN.
-    r = TP/(TP+FN)
+    if TP+FN == 0:
+        r = 0
+    else:
+        r = TP/(TP+FN)
+
     print('Recall:', r)
     # F1 Score balances both precision and recall. For models that have class imbalance
     # and a large number of TNs contribute to the accuracy, thus F1 focuses more on
     # TP vs FN/FP.
-    print('F1 Score:', (2*r*p)/(r+p))
+    if r+p == 0:
+        f1 = 0
+    else:
+        f1 = (2*r*p)/(r+p)
+        
+    print('F1 Score:', f1)
 
     return error

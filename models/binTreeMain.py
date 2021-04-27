@@ -83,7 +83,7 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
 
 if __name__ == '__main__':
 
-    keys = ['NM', 'ROS', 'RUS', 'TL', 'SMOTE']
+    keys = ['NM', 'ROS', 'RUS', 'TL', 'SMOTE', 'DS']
 
     for fileKey in keys:
         sys.stdout = open('../output/output'+ fileKey +'.txt', 'w')

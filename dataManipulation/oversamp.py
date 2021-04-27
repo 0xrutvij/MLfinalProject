@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from imblearn.under_sampling import RandomOverSampler as ROS
+from imblearn.over_sampling import RandomOverSampler as ROS
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split as tts
 

@@ -21,7 +21,7 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
     """
     creates the requested model, trains and tests the model, and then displays the results.
     """
-
+    print('-'*30)
     # use our bagging or boosting function
     if option == 0 or option == 1:
         # create ensemble model
@@ -77,50 +77,50 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
         print('Test Error = {0:4.2f}%.'.format(tst_err * 100))
 
     print('-'*30)
-    print('-'*30)
 
 
 
 
 if __name__ == '__main__':
 
-    fileKey = 'NM'
+    keys = ['NM', 'ROS', 'RUS', 'TL', 'SMOTE']
 
-    sys.stdout = open('../output/output'+ fileKey +'.txt', 'w')
+    for fileKey in keys:
+        sys.stdout = open('../output/output'+ fileKey +'.txt', 'w')
 
-    # Load the training data
-    M = np.genfromtxt('../learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
-    ytrn = M[:, 0]
-    xtrn = M[:, 1:]
+        # Load the training data
+        M = np.genfromtxt('../learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        ytrn = M[:, 0]
+        xtrn = M[:, 1:]
 
-    # Load the test data
-    M = np.genfromtxt('../learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
-    ytest = M[:, 0]
-    xtest = M[:, 1:]
+        # Load the test data
+        M = np.genfromtxt('../learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        ytest = M[:, 0]
+        xtest = M[:, 1:]
 
-    # Restructure data
-    xtrn = np.transpose(xtrn)
+        # Restructure data
+        xtrn = np.transpose(xtrn)
 
-    featureRangeList = []
-    for feature in xtrn:
-        dictValues = Counter(feature)
-        uniqueValues = list(dictValues.keys())
-        featureRangeList.append(uniqueValues)
+        featureRangeList = []
+        for feature in xtrn:
+            dictValues = Counter(feature)
+            uniqueValues = list(dictValues.keys())
+            featureRangeList.append(uniqueValues)
 
-    # create the attribute-value pairs
-    attribute_value_pairs = []
-    for i, featVals in enumerate(featureRangeList):
-        for val in featVals:
-            attribute_value_pairs.append((i, val))
+        # create the attribute-value pairs
+        attribute_value_pairs = []
+        for i, featVals in enumerate(featureRangeList):
+            for val in featVals:
+                attribute_value_pairs.append((i, val))
 
 
-    # Construct and test four bagging models for each combination of maximum depth d = 3, 5 and bag size = 10, 20
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
-    # Construct and test four boosting models for each combination of maximum depth d = 1, 2 and bag size = 20, 40
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
-    construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 5, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+        # Construct and test four bagging models for each combination of maximum depth d = 3, 5 and bag size = 10, 20
+        construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
+        # Construct and test four boosting models for each combination of maximum depth d = 1, 2 and bag size = 20, 40
+        construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+        construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 5, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
 
-    # Use scikit-learn’s bagging and AdaBoost learners and repeat the experiments above
-    # Bagging
-    construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 3, option = 2, bag_size=10)
-    construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 1, option = 3, bag_size=20)
+        # Use scikit-learn’s bagging and AdaBoost learners and repeat the experiments above
+        # Bagging
+        #construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 3, option = 2, bag_size=10)
+        #construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 1, option = 3, bag_size=10)

@@ -45,7 +45,7 @@ def predict_one_tree(x, tree):
     return predict_one_tree(x, subtree)
 
 
-def predict_example(x, h_ens):
+def predict_example(x, h_ens, probMode=False):
     """
     Predicts the final classification label for a single example x.
 
@@ -60,21 +60,35 @@ def predict_example(x, h_ens):
     for hypo in h_ens:
         # find the prediction from each tree and adapt the appropriate weigthed total
         pred = predict_one_tree(x, hypo[1])
-        weightedTotals[pred] = weightedTotals[pred]+ hypo[0]
+        if hypo[0] >= 0:
+            weightedTotals[pred] = weightedTotals[pred] + hypo[0]
 
-    # The label with the highest total is the predicted classification of x
-    if weightedTotals[1] > weightedTotals[0]:
-        return 1
+    # if operating in probability mode, return the likelihood of it being a positive example
+    if probMode:
+        num = weightedTotals[1]
+        denom = (weightedTotals[1] + weightedTotals[0])
+        if num < 0 or denom < 0:
+            print(num, denom, '\n')
+        return num/denom
     else:
-        return 0
+        # The label with the highest total is the predicted classification of x
+        if weightedTotals[1] > weightedTotals[0]:
+            return 1
+        else:
+            return 0
 
 
-def compute_error(y_true, y_pred):
+def compute_error(y_true, y_pred_in, probMode=False):
     """
     Computes the average error between the true labels and the predicted labels
 
     Returns the error = (1/n) * sum(y_true != y_pred)
     """
+    if probMode:
+        y_pred = [1 if pred >= 0.5 else 0 for pred in y_pred_in]
+    else:
+        y_pred = y_pred_in
+
     numMiss = 0
     numHit = 0
     FN = TN = TP = FP = 0

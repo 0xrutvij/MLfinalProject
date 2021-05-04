@@ -21,6 +21,6 @@ plt.show()
 
 fpr, tpr, thresholds = metrics.roc_curve(y, pred)
 roc_auc = metrics.auc(fpr, tpr)
-display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc,                                          estimator_name='example estimator')
+display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc, estimator_name='example estimator')
 display.plot()
 plt.show()

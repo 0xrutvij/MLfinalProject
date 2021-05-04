@@ -15,6 +15,8 @@ from ensembles import *
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import BaggingClassifier
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn import metrics
+import matplotlib.pyplot as plt
 
 
 def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attribute_value_pairs = None, bag_size=1):
@@ -35,11 +37,19 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
             end = time.process_time() - start
 
         # Compute the test error and display the confusion matrix
-        y_pred = [predict_example(x, model) for x in xtest]
+        y_pred = [predict_example(x, model, probMode=True) for x in xtest]
+    
         modelName = 'Bagging' if option==0 else 'AdaBoost'
+        probMode = True
+        if probMode:
+            fpr, tpr, thresholds = metrics.roc_curve(list(ytest), y_pred)
+            roc_auc = metrics.auc(fpr, tpr)
+            display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc, estimator_name=modelName)
+            display.plot()
+            plt.show()
         numberOf = ': Number of bags =' if option==0 else ": Number of learners ="
         print(modelName, numberOf, bag_size, ", Max Depth =", max_depth)
-        tst_err = compute_error(list(ytest), y_pred)
+        tst_err = compute_error(list(ytest), y_pred, probMode=True)
         print('Test Error = {0:4.2f}%.'.format(tst_err * 100))
         #print('CPU Runtime: {0}'.format(end))
 

@@ -1,0 +1,23 @@
+NM
+For Sigmoid Activation
+Number of Epochs: 102
+Final Training Error
+[0.48809524]
+The MSE is: 
+0.5277777777777778
+
+For Tanh Activation
+Number of Epochs: 102
+Final Training Error
+[0.48809524]
+The MSE is: 
+0.5277777777777778
+
+For ReLu Activation
+Number of Epochs: 102
+Final Training Error
+[0.48809524]
+The MSE is: 
+0.5277777777777778
+
+

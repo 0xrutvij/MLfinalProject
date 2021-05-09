@@ -1,0 +1,118 @@
+TL
+
+For a step size of  0.001
+For Sigmoid Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+For Tanh Activation
+Number of Epochs: 102
+The MSE is:  0.10204081632653061
+000 | 030
+000 | 264
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+For ReLu Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+---------------------------------------
+For a step size of  0.01
+For Sigmoid Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+For Tanh Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+For ReLu Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+---------------------------------------
+For a step size of  0.1
+For Sigmoid Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+For Tanh Activation
+Number of Epochs: 102
+The MSE is:  0.10204081632653061
+000 | 030
+000 | 264
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+For ReLu Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+---------------------------------------
+For a step size of  1
+For Sigmoid Activation
+Number of Epochs: 102
+The MSE is:  0.10204081632653061
+000 | 030
+000 | 264
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+For Tanh Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+For ReLu Activation
+Number of Epochs: 102
+The MSE is:  0.8979591836734694
+030 | 000
+264 | 000
+Precision: 0.10204081632653061
+Recall: 1.0
+F1 Score: 0.1851851851851852
+
+---------------------------------------

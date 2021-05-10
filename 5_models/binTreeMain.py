@@ -38,7 +38,7 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
 
         # Compute the test error and display the confusion matrix
         y_pred = [predict_example(x, model, probMode=True) for x in xtest]
-    
+
         modelName = 'Bagging' if option==0 else 'AdaBoost'
         probMode = True
         if probMode:
@@ -124,13 +124,9 @@ if __name__ == '__main__':
                 attribute_value_pairs.append((i, val))
 
 
-        # Construct and test four bagging models for each combination of maximum depth d = 3, 5 and bag size = 10, 20
+        # Construct and test a bagging model for a combination of maximum depth d = 3 and bag size = 5
         construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
-        # Construct and test four boosting models for each combination of maximum depth d = 1, 2 and bag size = 20, 40
+        # Construct and test a boosting model for a combination of maximum depth d = 1 and bag size = 10
         construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+        # Construct and test a decision tree model for a maximum depth d = 10
         construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 5, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
-
-        # Use scikit-learn’s bagging and AdaBoost learners and repeat the experiments above
-        # Bagging
-        #construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 3, option = 2, bag_size=10)
-        #construct_eval_model(np.transpose(xtrn), ytrn, xtest, ytest, 1, option = 3, bag_size=10)

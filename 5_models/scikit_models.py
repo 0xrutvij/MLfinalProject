@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     for fileKey in keys:
         
-        sys.stdout = open('Scikit_output'+ fileKey +'.txt', 'w')
+        sys.stdout = open('/Scikit/Scikit_output'+ fileKey +'.txt', 'w')
 
         print(fileKey)
         print("")

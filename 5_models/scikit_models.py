@@ -86,7 +86,7 @@ if __name__ == '__main__':
         for step in step_sizes:
         
           print("For a step size of ",step)
-          model = MLPClassifier(random_state=1, max_iter=max_epoch,learning_rate=step,activation=‘logistic’).fit(xtrain, ytrain)
+          model = MLPClassifier(random_state=1, max_iter=max_epoch,learning_rate=step,activation='logistic').fit(xtrain, ytrain)
           prediction = model.predict(xtest)
           
           evaluation(prediction,ytest)

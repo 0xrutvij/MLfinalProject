@@ -1,0 +1,27 @@
+------------------------------
+Bagging : Number of bags = 5 , Max Depth = 3
+099 | 008
+000 | 107
+Precision: 1.0
+Recall: 0.9252336448598131
+F1 Score: 0.9611650485436893
+Test Error = 3.74%.
+------------------------------
+------------------------------
+AdaBoost : Number of learners = 10 , Max Depth = 1
+099 | 008
+000 | 107
+Precision: 1.0
+Recall: 0.9252336448598131
+F1 Score: 0.9611650485436893
+Test Error = 3.74%.
+------------------------------
+------------------------------
+Decision Tree Classifier,  max depth of the tree: 10
+000 | 107
+000 | 107
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+Test Error = 50.00%.
+------------------------------

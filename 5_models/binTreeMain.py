@@ -1,4 +1,3 @@
-    # decision_tree.py
 # ---------
 # Licensing Information:  You are free to use or extend these projects for
 # personal and educational purposes provided that (1) you do not distribute

@@ -37,10 +37,24 @@ x = wholeSet[:, 1:]
 ##     Direct Split     ##
 ##########################
 
-# split into training and test data 75/25 split
+# split into training and test data 70/30 split
 xDStrain, xDStest, yDStrain, yDStest = tts(x, y, test_size=TEST_SIZE, random_state=6375)
 
 # save the training and test data into their respective files.
+x_pr = np.concatenate([xDStrain, xDStest])
+y_pr = np.concatenate([yDStrain, yDStest])
+dfProto = np.column_stack([y_pr,x_pr])
+df = pd.DataFrame(data=dfProto, columns=['contact_type', 'contact_class_score_diff', 'contact_id','counter', 'delay'])
+
+import plotly.express as px
+df["contact_type"] = df["contact_type"].astype(str) #convert to string
+df.sort_values(['contact_id', 'contact_type'], inplace=True)
+df["contact_id"] = df["contact_id"].astype(str) #convert to string
+fig = px.scatter(df, x='contact_class_score_diff', y='contact_id', color='contact_type', title="No Sampling",)
+df["contact_type"] = df["contact_type"].astype(int) #convert back to numeric
+df["contact_id"] = df["contact_id"].astype(int) #convert to numeric
+#title='Contact Class Score Diff vs Contact Type'
+fig.show()
 
 M = np.column_stack([yDStrain,xDStrain])
 if NN:
@@ -69,8 +83,24 @@ if DEBUG:
     print(y.shape)
     print(sorted(Counter(yRUS).items()))
 
-# split into training and test data 75/25 split
+# split into training and test data 70/30 split
 xRUStrain, xRUStest, yRUStrain, yRUStest = tts(xRUS, yRUS, test_size=TEST_SIZE, random_state=6375)
+
+x_pr = np.concatenate([xRUStrain, xRUStest])
+y_pr = np.concatenate([yRUStrain, yRUStest])
+dfProto = np.column_stack([y_pr,x_pr])
+df = pd.DataFrame(data=dfProto, columns=['contact_type', 'contact_class_score_diff', 'contact_id','counter', 'delay'])
+
+import plotly.express as px
+df["contact_type"] = df["contact_type"].astype(str) #convert to string
+df.sort_values(['contact_id', 'contact_type'], inplace=True)
+df["contact_id"] = df["contact_id"].astype(str) #convert to string
+fig = px.scatter(df, x='contact_class_score_diff', y='contact_id', color='contact_type', title="RUS",)
+df["contact_type"] = df["contact_type"].astype(int) #convert back to numeric
+df["contact_id"] = df["contact_id"].astype(int) #convert to numeric
+#title='Contact Class Score Diff vs Contact Type'
+fig.show()
+
 
 # save the training and test data into their respective files.
 M = np.column_stack([yRUStrain,xRUStrain])
@@ -101,8 +131,23 @@ if DEBUG:
     print(yTL.shape)
     print(sorted(Counter(yTL).items()))
 
-# split into training and test data 75/25 split
+# split into training and test data 70/30 split
 xTLtrain, xTLtest, yTLtrain, yTLtest = tts(xTL, yTL, test_size=TEST_SIZE, random_state=6375)
+
+x_pr = np.concatenate([xTLtrain, xTLtest])
+y_pr = np.concatenate([yTLtrain, yTLtest])
+dfProto = np.column_stack([y_pr,x_pr])
+df = pd.DataFrame(data=dfProto, columns=['contact_type', 'contact_class_score_diff', 'contact_id','counter', 'delay'])
+
+import plotly.express as px
+df["contact_type"] = df["contact_type"].astype(str) #convert to string
+df.sort_values(['contact_id', 'contact_type'], inplace=True)
+df["contact_id"] = df["contact_id"].astype(str) #convert to string
+fig = px.scatter(df, x='contact_class_score_diff', y='contact_id', color='contact_type', title="Tomek Link")
+df["contact_type"] = df["contact_type"].astype(int) #convert back to numeric
+df["contact_id"] = df["contact_id"].astype(int) #convert to numeric
+#title='Contact Class Score Diff vs Contact Type'
+fig.show()
 
 # save the training and test data into their respective files.
 M = np.column_stack([yTLtrain,xTLtrain])
@@ -133,8 +178,24 @@ if DEBUG:
     print(yNM.shape)
     print(sorted(Counter(yNM).items()))
 
-# split into training and test data 75/25 split
+# split into training and test data 70/30 split
 xNMtrain, xNMtest, yNMtrain, yNMtest = tts(xNM, yNM, test_size=TEST_SIZE, random_state=6375)
+
+x_pr = np.concatenate([xNMtrain, xNMtest])
+y_pr = np.concatenate([yNMtrain, yNMtest])
+dfProto = np.column_stack([y_pr,x_pr])
+df = pd.DataFrame(data=dfProto, columns=['contact_type', 'contact_class_score_diff', 'contact_id','counter', 'delay'])
+
+import plotly.express as px
+df["contact_type"] = df["contact_type"].astype(str) #convert to string
+df.sort_values(['contact_id', 'contact_type'], inplace=True)
+df["contact_id"] = df["contact_id"].astype(str) #convert to string
+fig = px.scatter(df, x='contact_class_score_diff', y='contact_id', color='contact_type', title="Near Miss")
+df["contact_type"] = df["contact_type"].astype(int) #convert back to numeric
+df["contact_id"] = df["contact_id"].astype(int) #convert to numeric
+#title='Contact Class Score Diff vs Contact Type'
+fig.show()
+
 
 # save the training and test data into their respective files.
 M = np.column_stack([yNMtrain,xNMtrain])

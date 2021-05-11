@@ -20,18 +20,18 @@ F1 Score: 0.9660377358490566
 For Max Depth of  3
 ---------------------------------------
 Using Gini Impurity
-273 | 001
-000 | 241
-Precision: 1.0
-Recall: 0.9963503649635036
-F1 Score: 0.9981718464351006
-
-Using Entropy
 256 | 018
 000 | 241
 Precision: 1.0
 Recall: 0.9343065693430657
 F1 Score: 0.9660377358490566
+
+Using Entropy
+273 | 001
+000 | 241
+Precision: 1.0
+Recall: 0.9963503649635036
+F1 Score: 0.9981718464351006
 
 For Max Depth of  5
 ---------------------------------------
@@ -123,11 +123,11 @@ Precision: 0.5320388349514563
 Recall: 1.0
 F1 Score: 0.694550063371356
 Neural Network Using tanh Activation:
-000 | 274
-000 | 241
-Precision: 0
-Recall: 0.0
-F1 Score: 0
+274 | 000
+241 | 000
+Precision: 0.5320388349514563
+Recall: 1.0
+F1 Score: 0.694550063371356
 Neural Network Using RELU Activation:
 000 | 274
 000 | 241

@@ -8,8 +8,12 @@ from sklearn.model_selection import train_test_split as tts
 
 DEBUG = False
 TEST_SIZE = 0.30
+NN = False
 
-df = pd.read_csv('../processedData/aggregatedAndProcessed.csv')
+if NN:
+    df = pd.read_csv('../3_processedData/aggregatedAndProcessedNN.csv')
+else:
+    df = pd.read_csv('../3_processedData/aggregatedAndProcessed.csv')
 
 df = df[['contact_type', 'contact_class_score_diff', 'contact_id','counter', 'delay']]
 
@@ -37,11 +41,18 @@ x = wholeSet[:, 1:]
 xDStrain, xDStest, yDStrain, yDStest = tts(x, y, test_size=TEST_SIZE, random_state=6375)
 
 # save the training and test data into their respective files.
-M = np.column_stack([yDStrain,xDStrain])
-np.savetxt('../learningData/DStrain.csv', M, delimiter=',', fmt='%d')
-M = np.column_stack([yDStest,xDStest])
-np.savetxt('../learningData/DStest.csv', M, delimiter=',', fmt='%d')
 
+M = np.column_stack([yDStrain,xDStrain])
+if NN:
+    np.savetxt('../4_learningData/DStrainNN.csv', M, delimiter=',', fmt='%d')
+else:
+    np.savetxt('../4_learningData/DStrain.csv', M, delimiter=',', fmt='%d')
+
+M = np.column_stack([yDStest,xDStest])
+if NN:
+    np.savetxt('../4_learningData/DStestNN.csv', M, delimiter=',', fmt='%d')
+else:
+    np.savetxt('../4_learningData/DStest.csv', M, delimiter=',', fmt='%d')
 
 ##########################
 ## Random Undersampling ##
@@ -63,9 +74,15 @@ xRUStrain, xRUStest, yRUStrain, yRUStest = tts(xRUS, yRUS, test_size=TEST_SIZE, 
 
 # save the training and test data into their respective files.
 M = np.column_stack([yRUStrain,xRUStrain])
-np.savetxt('../learningData/RUStrain.csv', M, delimiter=',', fmt='%d')
+if NN:
+    np.savetxt('../4_learningData/RUStrainNN.csv', M, delimiter=',', fmt='%d')
+else: 
+    np.savetxt('../4_learningData/RUStrain.csv', M, delimiter=',', fmt='%d')
 M = np.column_stack([yRUStest,xRUStest])
-np.savetxt('../learningData/RUStest.csv', M, delimiter=',', fmt='%d')
+if NN:
+    np.savetxt('../4_learningData/RUStestNN.csv', M, delimiter=',', fmt='%d')
+else: 
+    np.savetxt('../4_learningData/RUStest.csv', M, delimiter=',', fmt='%d')
 
 
 
@@ -89,9 +106,15 @@ xTLtrain, xTLtest, yTLtrain, yTLtest = tts(xTL, yTL, test_size=TEST_SIZE, random
 
 # save the training and test data into their respective files.
 M = np.column_stack([yTLtrain,xTLtrain])
-np.savetxt('../learningData/TLtrain.csv', M, delimiter=',', fmt='%d')
+if NN:
+    np.savetxt('../4_learningData/TLtrainNN.csv', M, delimiter=',', fmt='%d')
+else: 
+    np.savetxt('../4_learningData/TLtrain.csv', M, delimiter=',', fmt='%d')
 M = np.column_stack([yTLtest,xTLtest])
-np.savetxt('../learningData/TLtest.csv', M, delimiter=',', fmt='%d')
+if NN:
+    np.savetxt('../4_learningData/TLtestNN.csv', M, delimiter=',', fmt='%d')
+else: 
+    np.savetxt('../4_learningData/TLtest.csv', M, delimiter=',', fmt='%d')
 
 
 
@@ -115,6 +138,12 @@ xNMtrain, xNMtest, yNMtrain, yNMtest = tts(xNM, yNM, test_size=TEST_SIZE, random
 
 # save the training and test data into their respective files.
 M = np.column_stack([yNMtrain,xNMtrain])
-np.savetxt('../learningData/NMtrain.csv', M, delimiter=',', fmt='%d')
+if NN:
+    np.savetxt('../4_learningData/NMtrainNN.csv', M, delimiter=',', fmt='%d')
+else: 
+    np.savetxt('../4_learningData/NMtrain.csv', M, delimiter=',', fmt='%d')
 M = np.column_stack([yNMtest,xNMtest])
-np.savetxt('../learningData/NMtest.csv', M, delimiter=',', fmt='%d')
+if NN:
+    np.savetxt('../4_learningData/NMtestNN.csv', M, delimiter=',', fmt='%d')
+else: 
+    np.savetxt('../4_learningData/NMtest.csv', M, delimiter=',', fmt='%d')

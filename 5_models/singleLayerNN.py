@@ -52,6 +52,7 @@ class neuralNetwork:
     
   # Assign the class
   def classify(self,x):
+      #return x
       if(x<=1):
           return 0 
       else:
@@ -64,6 +65,7 @@ class neuralNetwork:
     hiddenlayer_pass = vectorized_actFunct(product1) # apply activation funct
     vectorized_classify = np.vectorize(self.classify)
     o = vectorized_classify(hiddenlayer_pass.dot(outputlayer))
+    #print(o)
     return o
 
   def testMyNetwork(self,xtest,ytest):
@@ -75,6 +77,7 @@ class neuralNetwork:
     result = secondpass = vectorized_classify(firstpass.dot(self.outputlayer))
   
     # find the MSE
+    #print(result)
     MSE = mean_squared_error(ytest,result)
     print("The MSE is: ", MSE)
     
@@ -228,25 +231,27 @@ def do_backprop(eta,max_epoch,xtrain,ytrain,xtest,ytest):
 # the main
 if __name__ == '__main__':
 
-    max_epoch = 100
-    step_sizes = [0.001, 0.01, 0.1, 1]
+    max_epoch = 300
+    #step_sizes = [0.001, 0.01, 0.1, 1]
+    step_sizes = [0.1]
 
-    keys = ['NM', 'ROS', 'RUS', 'TL', 'SMOTE', 'DS']
+    #keys = ['NM', 'ROS', 'RUS', 'TL', 'SMOTE', 'DS']
+    keys = ['DS']
 
     for fileKey in keys:
         
-        sys.stdout = open('NNoutput'+ fileKey +'.txt', 'w')
+        sys.stdout = open('../6_output/NNoutput'+ fileKey +'.txt', 'w')
 
         print(fileKey)
         print("")
 
         # Load the training data
-        M = np.genfromtxt('C:/Users/Hallie/Source/Repos/MLfinalProject/learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        M = np.genfromtxt('../4_learningData/' +fileKey+ 'trainNN.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
         ytrain = M[:, 0]
         xtrain = M[:, 1:]
 
         # Load the test data
-        M = np.genfromtxt('C:/Users/Hallie/Source/Repos/MLfinalProject/learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        M = np.genfromtxt('../4_learningData/' +fileKey+ 'testNN.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
         ytest = M[:, 0]
         xtest = M[:, 1:]
 

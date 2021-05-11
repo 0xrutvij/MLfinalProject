@@ -28,5 +28,15 @@
         "7 < counter <= 17": 1,
         "17 < counter <= 28": 2,
         "28 < counter <= 116": 3
+    },
+    "scoreThresholdMapping": {
+        "thresholdVals": [
+            51,
+            118,
+            147
+        ],
+        "contact_class_score_diff <= 51": 0,
+        "51 < contact_class_score_diff <= 118": 1,
+        "118 < contact_class_score_diff <= 147": 2
     }
 }

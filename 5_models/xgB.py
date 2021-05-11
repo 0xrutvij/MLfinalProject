@@ -13,14 +13,14 @@ if __name__ == '__main__':
     for fileKey in keys:
         print(fileKey)
         # Load the training data
-        M = np.genfromtxt('../learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        M = np.genfromtxt('../4_learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
         ytrain = M[:, 0]
         ytrain = np.ascontiguousarray(ytrain)
         xtrain = M[:, 1:]
         xtrain = np.ascontiguousarray(xtrain)
 
         # Load the test data
-        M = np.genfromtxt('../learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        M = np.genfromtxt('../4_learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
         ytest = M[:, 0]
         ytest = np.ascontiguousarray(ytest)
         xtest = M[:, 1:]

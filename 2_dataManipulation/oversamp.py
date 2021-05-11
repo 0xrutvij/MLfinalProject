@@ -8,7 +8,7 @@ DEBUG = False
 TEST_SIZE = 0.30
 
 # load the data
-df = pd.read_csv('../processedData/aggregatedAndProcessed.csv')
+df = pd.read_csv('../3_processedData/aggregatedAndProcessed.csv')
 df = df[['contact_type', 'contact_class_score_diff', 'contact_id','counter', 'delay']]
 
 proxCount, closeCount = df['contact_type'].value_counts()
@@ -43,9 +43,9 @@ xROStrain, xROStest, yROStrain, yROStest = tts(xROS, yROS, test_size=TEST_SIZE, 
 
 # save the training and test data into their respective files.
 M = np.column_stack([yROStrain,xROStrain])
-np.savetxt('../learningData/ROStrain.csv', M, delimiter=',', fmt='%d')
+np.savetxt('../4_learningData/ROStrain.csv', M, delimiter=',', fmt='%d')
 M = np.column_stack([yROStest,xROStest])
-np.savetxt('../learningData/ROStest.csv', M, delimiter=',', fmt='%d')
+np.savetxt('../4_learningData/ROStest.csv', M, delimiter=',', fmt='%d')
 
 
 
@@ -64,6 +64,6 @@ xSMOTEtrain, xSMOTEtest, ySMOTEtrain, ySMOTEtest = tts(xSMOTE, ySMOTE, test_size
 
 # save the training and test data into their respective files.
 M = np.column_stack([ySMOTEtrain,xSMOTEtrain])
-np.savetxt('../learningData/SMOTEtrain.csv', M, delimiter=',', fmt='%d')
+np.savetxt('../4_learningData/SMOTEtrain.csv', M, delimiter=',', fmt='%d')
 M = np.column_stack([ySMOTEtest,xSMOTEtest])
-np.savetxt('../learningData/SMOTEtest.csv', M, delimiter=',', fmt='%d')
+np.savetxt('../4_learningData/SMOTEtest.csv', M, delimiter=',', fmt='%d')

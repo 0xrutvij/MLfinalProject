@@ -21,7 +21,7 @@ import numpy as np
 from dateutil import parser
 import json
 
-preFix = '../rawData/cb-devices-main('
+preFix = '../1_rawData/cb-devices-main('
 postFix = ').csv'
 files = []
 dfList = []
@@ -115,7 +115,7 @@ deviceIdToIntMapping = {}
 
 for i, id in enumerate(setOfDevicesContacted):
     df1 = grouped.get_group(id)
-    df1.to_csv('../processedData/' + id + '.csv')
+    df1.to_csv('../3_processedData/' + id + '.csv')
     df.loc[df['contact_id'] == id, 'contact_id'] = i
     deviceIdToIntMapping[id] = i
 
@@ -129,7 +129,33 @@ mappings = {
     'counterThresholdMapping':counterThresholdMapping
     }
 
-with open('../processedData/mappings.json', 'w') as output:
+with open('../3_processedData/mappings.json', 'w') as output:
     json.dump(mappings, output, indent=4)
 
-df.to_csv('../processedData/aggregatedAndProcessed.csv')
+df.to_csv('../3_processedData/aggregatedAndProcessed.csv')
+
+compVals = df['contact_class_score_diff'].describe().to_list()[-4:]
+compVals = compVals[:3]
+print(compVals)
+compVals = [int(i) for i in compVals]
+prev = ''
+prevVal = -1
+scoreThresholdMapping = {}
+scoreThresholdMapping['thresholdVals'] = compVals
+for i, val in enumerate(compVals):
+    df.loc[(df['contact_class_score_diff'] > prevVal) & (df['contact_class_score_diff'] <= val), 'contact_class_score_diff'] = i
+    scoreThresholdMapping[prev + 'contact_class_score_diff <= ' + str(val)] = i
+    prevVal = val
+    prev = str(val) + ' < '
+
+mappings = {
+    'delayThresholdMapping':delayThresholdMapping,
+    'deviceIdToIntMapping':deviceIdToIntMapping,
+    'counterThresholdMapping':counterThresholdMapping,
+    'scoreThresholdMapping': scoreThresholdMapping
+    }
+
+with open('../3_processedData/mappingsNN.json', 'w') as output:
+    json.dump(mappings, output, indent=4)
+
+df.to_csv('../3_processedData/aggregatedAndProcessedNN.csv')

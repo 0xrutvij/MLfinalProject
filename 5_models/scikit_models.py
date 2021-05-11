@@ -1,6 +1,6 @@
 from sklearn.neural_network import MLPClassifier
 import sys
-
+import numpy as np
 
 # Find the number of True positives, false positive, etc
 def evaluation(result,ytest):

@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.metrics import mean_squared_error
 import math
 import sys
-#import numpy_ml
+import numpy_ml
 
 
 # Create the neural network class
@@ -206,6 +206,8 @@ class neuralNetwork:
         # Find dE/dwi
         partial1 = (self.input.T.dot(deltahidden))/self.numOfSamples
         partial2 = (xhidden.T.dot(delta_o))/self.numOfSamples
+        partial1 = partial1 if partial1 < 5 or partial1 > -5 else 5 if partial1 > 5 else -5
+        partial2 = partial2 if partial2 < 5 or partial2 > -5 else 5 if partial2 > 5 else -5
 
         # exponential moving average
         v1 = (partial1**2)*(1-self.beta)+(v1*self.beta) # hidden layer

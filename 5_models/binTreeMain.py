@@ -46,12 +46,12 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
             fpr, tpr, thresholds = metrics.roc_curve(list(ytest), y_pred)
             roc_auc = metrics.auc(fpr, tpr)
             display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc, estimator_name=modelName)
-            display.plot()
-            plt.show()
+            plot = display
         numberOf = ': Number of bags =' if option==0 else ": Number of learners ="
         print(modelName, numberOf, bag_size, ", Max Depth =", max_depth)
         tst_err = compute_error(list(ytest), y_pred, probMode=True)
         print('Test Error = {0:4.2f}%.'.format(tst_err * 100))
+        return plot
         #print('CPU Runtime: {0}'.format(end))
 
     # use scikit learners
@@ -126,9 +126,15 @@ if __name__ == '__main__':
 
 
         # Construct and test a bagging model for a combination of maximum depth d = 3 and bag size = 5
-        construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
+        plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
+        plot.plot()
+        plt.savefig('../6_output/rocCurves/'+ fileKey + 'bagging')
+        plt.close()
         # Construct and test a boosting model for a combination of maximum depth d = 1 and bag size = 10
-        construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+        plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+        plot.plot()
+        plt.savefig('../6_output/rocCurves/'+ fileKey + 'boosting')
+        plt.close()
         # Construct and test a decision tree model for a maximum depth d = 10
         construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 5, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
 
@@ -165,8 +171,8 @@ if __name__ == '__main__':
 
 
             # Construct and test a bagging model for a combination of maximum depth d = 3 and bag size = 5
-            construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
+            plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
             # Construct and test a boosting model for a combination of maximum depth d = 1 and bag size = 10
-            construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+            plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
             # Construct and test a decision tree model for a maximum depth d = 10
             construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 5, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)

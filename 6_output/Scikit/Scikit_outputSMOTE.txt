@@ -1,0 +1,137 @@
+SMOTE
+
+Scikit's Binary Decision Trees:
+For Max Depth of  1
+---------------------------------------
+Using Gini Impurity
+256 | 018
+000 | 241
+Precision: 1.0
+Recall: 0.9343065693430657
+F1 Score: 0.9660377358490566
+
+Using Entropy
+256 | 018
+000 | 241
+Precision: 1.0
+Recall: 0.9343065693430657
+F1 Score: 0.9660377358490566
+
+For Max Depth of  3
+---------------------------------------
+Using Gini Impurity
+273 | 001
+000 | 241
+Precision: 1.0
+Recall: 0.9963503649635036
+F1 Score: 0.9981718464351006
+
+Using Entropy
+256 | 018
+000 | 241
+Precision: 1.0
+Recall: 0.9343065693430657
+F1 Score: 0.9660377358490566
+
+For Max Depth of  5
+---------------------------------------
+Using Gini Impurity
+273 | 001
+000 | 241
+Precision: 1.0
+Recall: 0.9963503649635036
+F1 Score: 0.9981718464351006
+
+Using Entropy
+273 | 001
+000 | 241
+Precision: 1.0
+Recall: 0.9963503649635036
+F1 Score: 0.9981718464351006
+
+************************************
+Scikit's Neural Networks:
+For a step size of  0.001
+---------------------------------------
+Neural Network Using Sigmoid Activation:
+254 | 020
+024 | 217
+Precision: 0.9136690647482014
+Recall: 0.927007299270073
+F1 Score: 0.9202898550724637
+Neural Network Using tanh Activation:
+256 | 018
+030 | 211
+Precision: 0.8951048951048951
+Recall: 0.9343065693430657
+F1 Score: 0.9142857142857143
+Neural Network Using RELU Activation:
+247 | 027
+038 | 203
+Precision: 0.8666666666666667
+Recall: 0.9014598540145985
+F1 Score: 0.8837209302325582
+
+For a step size of  0.01
+---------------------------------------
+Neural Network Using Sigmoid Activation:
+256 | 018
+034 | 207
+Precision: 0.8827586206896552
+Recall: 0.9343065693430657
+F1 Score: 0.9078014184397163
+Neural Network Using tanh Activation:
+254 | 020
+027 | 214
+Precision: 0.9039145907473309
+Recall: 0.927007299270073
+F1 Score: 0.9153153153153154
+Neural Network Using RELU Activation:
+221 | 053
+009 | 232
+Precision: 0.9608695652173913
+Recall: 0.8065693430656934
+F1 Score: 0.876984126984127
+
+For a step size of  0.1
+---------------------------------------
+Neural Network Using Sigmoid Activation:
+256 | 018
+050 | 191
+Precision: 0.8366013071895425
+Recall: 0.9343065693430657
+F1 Score: 0.8827586206896553
+Neural Network Using tanh Activation:
+229 | 045
+016 | 225
+Precision: 0.9346938775510204
+Recall: 0.8357664233576643
+F1 Score: 0.882466281310212
+Neural Network Using RELU Activation:
+252 | 022
+038 | 203
+Precision: 0.8689655172413793
+Recall: 0.9197080291970803
+F1 Score: 0.8936170212765957
+
+For a step size of  1
+---------------------------------------
+Neural Network Using Sigmoid Activation:
+274 | 000
+241 | 000
+Precision: 0.5320388349514563
+Recall: 1.0
+F1 Score: 0.694550063371356
+Neural Network Using tanh Activation:
+000 | 274
+000 | 241
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+Neural Network Using RELU Activation:
+000 | 274
+000 | 241
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+

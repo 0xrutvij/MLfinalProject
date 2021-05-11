@@ -1,6 +1,8 @@
 from sklearn.neural_network import MLPClassifier
+from sklearn import tree
 import sys
 import numpy as np
+
 
 # Find the number of True positives, false positive, etc
 def evaluation(result,ytest):
@@ -64,30 +66,67 @@ if __name__ == '__main__':
 
     for fileKey in keys:
         
-        sys.stdout = open('Scikit_output'+ fileKey +'.txt', 'w')
+        sys.stdout = open('/Scikit/Scikit_output'+ fileKey +'.txt', 'w')
 
         print(fileKey)
         print("")
 
         # Load the training data
-        M = np.genfromtxt('C:/Users/Hallie/Source/Repos/MLfinalProject/learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        M = np.genfromtxt('./4_learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
         ytrain = M[:, 0]
         xtrain = M[:, 1:]
 
         # Load the test data
-        M = np.genfromtxt('C:/Users/Hallie/Source/Repos/MLfinalProject/learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        M = np.genfromtxt('./4_learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
         ytest = M[:, 0]
         xtest = M[:, 1:]
+
+        # Create Binary Decision Tree
+        max_depths = [1, 3, 5]
+
+        print("Scikit's Binary Decision Trees:")
+
+        for depth in max_depths:
+            print("For Max Depth of ", depth)
+            print("---------------------------------------")
+
+            print("Using Gini Impurity")
+            tree1 = tree.DecisionTreeClassifier(criterion="entropy", max_depth = depth).fit(xtrain,ytrain)
+            result1 = tree1.predict(xtest)
+            evaluation(result1,ytest)
+            print("")
+
+            print("Using Entropy")
+            tree2 = tree.DecisionTreeClassifier(criterion="gini", max_depth = depth).fit(xtrain,ytrain)
+            result2 = tree2.predict(xtest)
+            evaluation(result2,ytest)
+
+            print("")
     
         # Create Neural Networks
-        max_epoch = 300
+        max_epoch = 500
         step_sizes = [0.001, 0.01, 0.1, 1]
+
+        print("************************************")
+        print("Scikit's Neural Networks:")
          
         for step in step_sizes:
         
           print("For a step size of ",step)
-          model = MLPClassifier(random_state=1, max_iter=max_epoch,learning_rate=step,activation='logistic').fit(xtrain, ytrain)
-          prediction = model.predict(xtest)
-          
-          evaluation(prediction,ytest)
+          print("---------------------------------------")
+          print("Neural Network Using Sigmoid Activation:")
+          model1 = MLPClassifier(random_state=1, max_iter=max_epoch,learning_rate_init=step,activation='logistic').fit(xtrain, ytrain)
+          prediction1 = model1.predict(xtest)
+          evaluation(prediction1,ytest)
+
+          print("Neural Network Using tanh Activation:")
+          model2 = MLPClassifier(random_state=1, max_iter=max_epoch,learning_rate_init=step,activation='tanh').fit(xtrain, ytrain)
+          prediction2 = model2.predict(xtest)
+          evaluation(prediction2,ytest)
+
+          print("Neural Network Using RELU Activation:")
+          model3 = MLPClassifier(random_state=1, max_iter=max_epoch,learning_rate_init=step,activation='relu').fit(xtrain, ytrain)
+          prediction3 = model3.predict(xtest)
+          evaluation(prediction3,ytest)
+          print("")
           

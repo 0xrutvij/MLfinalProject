@@ -19,7 +19,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attribute_value_pairs = None, bag_size=1):
+def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attribute_value_pairs = None, bag_size=1, type=None):
     """
     creates the requested model, trains and tests the model, and then displays the results.
     """
@@ -44,7 +44,7 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
         if probMode:
             fpr, tpr, thresholds = metrics.roc_curve(list(ytest), y_pred)
             roc_auc = metrics.auc(fpr, tpr)
-            display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc, estimator_name=modelName)
+            display = metrics.RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=roc_auc, estimator_name=type)
             plot = display
         numberOf = ': Number of bags =' if option==0 else ": Number of learners ="
         print(modelName, numberOf, bag_size, ", Max Depth =", max_depth)
@@ -95,6 +95,8 @@ if __name__ == '__main__':
 
     keys = ['NM', 'ROS', 'RUS', 'TL', 'SMOTE', 'DS']
 
+    plots = []
+
     for fileKey in keys:
         sys.stdout = open('../6_output/output'+ fileKey +'.txt', 'w')
 
@@ -125,31 +127,36 @@ if __name__ == '__main__':
 
 
         # Construct and test a bagging model for a combination of maximum depth d = 3 and bag size = 5
-        plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
-        plot.plot()
-        plt.savefig('../6_output/rocCurves/'+ fileKey + 'bagging')
-        plt.close()
+        plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5, type=fileKey+'_Bagged')
+        plots.append((plot, fileKey+'_Bagged'))
         # Construct and test a boosting model for a combination of maximum depth d = 1 and bag size = 10
-        plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
-        plot.plot()
-        plt.savefig('../6_output/rocCurves/'+ fileKey + 'boosting')
-        plt.close()
+        plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10, type=fileKey+'_Boosted')
+        plots.append((plot, fileKey+'_Boosted'))
         # Construct and test a decision tree model for a maximum depth d = 10
         construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 5, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
 
+    ax = plt.gca()
+
+    for plot, name in plots:
+        plot.plot(ax=ax)
+    
+    plt.savefig('../6_output/rocCurves/'+ 'ensembles')
+    plt.close()
     keys = ['ROS', 'RUS', 'DS']
 
     for fileKey in keys:
-        for i in range(8):
-            sys.stdout = open('../6_output/outputFolds/output'+ str(i) + fileKey +'.txt', 'w')
+        plotsBagged = []
+        plotsBoosted = []
+        for fold in range(8):
+            sys.stdout = open('../6_output/outputFolds/output'+ str(fold) + fileKey +'.txt', 'w')
 
             # Load the training data
-            M = np.genfromtxt('../4_learningData/stratFolds/'+ str(i) +fileKey+ 'trainFold.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+            M = np.genfromtxt('../4_learningData/stratFolds/'+ str(fold) +fileKey+ 'trainFold.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
             ytrn = M[:, 0]
             xtrn = M[:, 1:]
 
             # Load the test data
-            M = np.genfromtxt('../4_learningData/stratFolds/'+ str(i) +fileKey+ 'testFold.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+            M = np.genfromtxt('../4_learningData/stratFolds/'+ str(fold) +fileKey+ 'testFold.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
             ytest = M[:, 0]
             xtest = M[:, 1:]
 
@@ -170,8 +177,25 @@ if __name__ == '__main__':
 
 
             # Construct and test a bagging model for a combination of maximum depth d = 3 and bag size = 5
-            plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5)
+            plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 0, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=5, type=fileKey+'_Bagged_F'+str(fold))
+            plotsBagged.append((plot, fileKey+'_Bagged'))
             # Construct and test a boosting model for a combination of maximum depth d = 1 and bag size = 10
-            plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+            plot = construct_eval_model(xtrn, ytrn, xtest, ytest, 1, option = 1, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10, type=fileKey+'_Boosted_F'+str(fold))
+            plotsBoosted.append((plot, fileKey+'_Boosted'))
             # Construct and test a decision tree model for a maximum depth d = 10
             construct_eval_model(xtrn, ytrn, xtest, ytest, 3, option = 5, attribute_value_pairs = attribute_value_pairs.copy(), bag_size=10)
+
+        ax = plt.gca()
+        for plot, name in plotsBagged:
+            plot.plot(ax=ax)
+
+        plt.savefig('../6_output/rocCurves/'+ 'ensemblesXValidated' + fileKey + '_Bagged')
+        plt.close()
+
+        ax = plt.gca()
+        for plot, name in plotsBoosted:
+            plot.plot(ax=ax)
+
+        plt.savefig('../6_output/rocCurves/'+ 'ensemblesXValidated' + fileKey + '_Boosted')
+        plt.close()
+

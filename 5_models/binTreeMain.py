@@ -18,6 +18,29 @@ from sklearn import metrics
 import numpy as np
 import matplotlib.pyplot as plt
 
+def visualize(tree, depth=0):
+    """
+    Pretty prints (kinda ugly, but hey, it's better than nothing) the decision tree to the console. Use print(tree) to
+    print the raw nested dictionary representation.
+    DO NOT MODIFY THIS FUNCTION!
+    """
+
+    if depth == 0:
+        print('TREE')
+
+    for index, split_criterion in enumerate(tree):
+        sub_trees = tree[split_criterion]
+
+        # Print the current node: split criterion
+        print('|\t' * depth, end='')
+        print('+-- [SPLIT: x{0} = {1}]'.format(split_criterion[0], split_criterion[1]))
+
+        # Print the children
+        if type(sub_trees) is dict:
+            visualize(sub_trees, depth + 1)
+        else:
+            print('|\t' * (depth + 1), end='')
+            print('+-- [LABEL = {0}]'.format(sub_trees))
 
 def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attribute_value_pairs = None, bag_size=1, type=None):
     """
@@ -85,6 +108,9 @@ def construct_eval_model(xtrn, ytrn, xtest, ytest, max_depth, option = 3, attrib
         print(modelName, numberOf, bag_size)
         tst_err = compute_error(list(ytest), y_pred)
         print('Test Error = {0:4.2f}%.'.format(tst_err * 100))
+        print("-+-"*5)
+        print(tree)
+        print("-+-"*5, '\n')     
 
     print('-'*30)
 

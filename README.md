@@ -1,119 +1,93 @@
 # MLfinalProject
 
+##Main Files in this Project
 
-**Files in this Project:**
+dataProc - This is a preliminary analysis of the data, including histograms and simple curve fitting.
+binTreeMain - An emsemble of binary decision trees implementing bagging and Adaboost.
+NeuralNet - A simple neural network with options of sigmoid, tanh, and ReLu for the activation function and that uses RMSProp
 
-    dataProc - This is a preliminary analysis of the data, including histograms and simple curve fitting.
-    binTreeMain - An emsemble of binary decision trees implementing bagging and Adaboost.
-    NeuralNet - A simple neural network with options of sigmoid, tanh, and ReLu for the activation function and that uses RMSProp
+- Executing the data processing module
+  ```cd 2_dataManipulation && python3 dataProc.py```
+  This accesses data in the 1_rawData folder and stores it in 3_processedData
+  
+- Executing the sampling and 8-fold stratified xValidation modules
+  `python3 oversamp.py && python3 undersamp.py && python3 xValidation.py`
+  These access data in the 3_processedData folder and store it in the 4_learningData folder.
+  
+- Executing the custom ensembles and the decision trees.
+  `cd 5_models && python3 binTreeMain.py`
+  This reads in the various sampled and stratified datasets and generates output (text and images for ROC curves) 
+  saving them in the 6_output folder
+  
+- Executing the custom Neural Network
+  `python3 NeuralNet.py`
+  This reads in the various sampled and stratified datasets and generates output (text and images for ROC curves) 
+  saving them in the 6_output folder
+
+
 
 
 ```
 .
 ├── 1_rawData
 │   ├── cb-devices-main(1).csv
-│   ├── <9 More Files>
+│   ├── cb-devices-main(10).csv
+|   └── <8 more files>
 |
 ├── 2_dataManipulation
-│   ├── dataProc.ipynb
 │   ├── dataProc.py
-│   ├── dataProc_2.ipynb
 │   ├── oversamp.py
 │   ├── undersamp.py
-│   └── xValidation.py
+│   ├── xValidation.py
+|   └── <2 more files>
 |
 ├── 3_processedData
-│   ├── 012D.csv
-│   ├── 01BA.csv
-│   ├── 481F.csv
-│   ├── 9328.csv
 │   ├── aggregatedAndProcessed.csv
 │   ├── aggregatedAndProcessedNN.csv
 │   ├── mappings.json
-│   └── mappingsNN.json
+│   └── <5 more files>
 |
 ├── 4_learningData
 │   ├── DStest.csv
 │   ├── DStrain.csv
-│   ├── NMtest.csv
-│   ├── NMtrain.csv
-│   ├── ROStest.csv
-│   ├── ROStrain.csv
-│   ├── RUStest.csv
-│   ├── RUStrain.csv
-│   ├── SMOTEtest.csv
-│   ├── SMOTEtrain.csv
+│   ├── <8 more files>
 │   ├── TLtest.csv
 │   ├── TLtrain.csv
 │   └── stratFolds
 │       ├── 0DStestFold.csv
-│       └── <41 More Files>
+│       └── <41 more files>
 |
 ├── 5_models
+│   ├── NeuralNet.py
 │   ├── binTree.py
 │   ├── binTreeMain.py
 │   ├── ensembles.py
-│   ├── scikit_models.py
-│   ├── singleLayerNN.py
-│   ├── utils.py
-│   └── xgB.py
+│   └── <3 more files>
 |
 ├── 6_output
-│   ├── NNoutputNM.txt
-│   ├── NNoutputROS.txt
-│   ├── NNoutputRUS.txt
-│   ├── NNoutputSMOTE.txt
-│   ├── NNoutputTL.txt
 │   ├── Scikit
 │   │   ├── Scikit_outputDS.txt
-│   │   ├── Scikit_outputNM.txt
-│   │   ├── Scikit_outputROS.txt
-│   │   ├── Scikit_outputRUS.txt
-│   │   ├── Scikit_outputSMOTE.txt
-│   │   ├── Scikit_outputTL.txt
+│   │   ├── <10 more files>
 │   │   └── rocCurves
-│   │       ├── DS_SK_DTs.png
-│   │       ├── DS_SK_NNs.png
-│   │       ├── NM_SK_DTs.png
-│   │       ├── NM_SK_NNs.png
-│   │       ├── ROS_SK_DTs.png
-│   │       ├── ROS_SK_NNs.png
-│   │       ├── RUS_SK_DTs.png
-│   │       ├── RUS_SK_NNs.png
-│   │       ├── SMOTE_SK_DTs.png
-│   │       ├── SMOTE_SK_NNs.png
-│   │       ├── TL_SK_DTs.png
-│   │       └── TL_SK_NNs.png
-│   ├── outputBNDS.txt
-│   ├── outputDS.txt
-│   ├── outputFolds
-│   │   ├── output0DS.txt
-│   |   └── <20 More Files>
-│   ├── outputNM.txt
-│   ├── outputROS.txt
-│   ├── outputRUS.txt
-│   ├── outputSMOTE.txt
-│   ├── outputTL.txt
+│   │       └── <12 more files>
+|   |
+│   ├── ensemblesOutput
+│   │   └── <6 more files>
+|   |
+│   ├── nnOutput
+│   │   └── <6 more files>
+|   |
+│   ├── outputStratifiedFolds
+│   │   └── <21 more files>
+|   |
 │   └── rocCurves
-│       ├── DSbagging.png
-│       ├── DSboosting.png
-│       ├── NMbagging.png
-│       ├── NMboosting.png
-│       ├── ROSbagging.png
-│       ├── ROSboosting.png
-│       ├── RUSbagging.png
-│       ├── RUSboosting.png
-│       ├── SMOTEbagging.png
-│       ├── SMOTEboosting.png
-│       ├── TLbagging.png
-│       └── TLboosting.png
-|
+│       └── <6 more files>
+|   
 ├── 7_outputEval
-│   ├── graphs.py
-│   ├── heatmap.py
-│   └── rocExp.py
+│   └── <3 more files>
+|
 ├── README.md
 └── researchGuide.pdf
 
-13 directories, 167 files
+15 directories, 172 files
 ```

@@ -1,0 +1,118 @@
+NM
+
+For a step size of  0.001
+For Sigmoid Activation
+Number of Epochs: 202
+The MSE is:  0.5277777777777778
+034 | 000
+038 | 000
+Precision: 0.4722222222222222
+Recall: 1.0
+F1 Score: 0.6415094339622641
+
+For Tanh Activation
+Number of Epochs: 202
+The MSE is:  0.4722222222222222
+000 | 034
+000 | 038
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+For ReLu Activation
+Number of Epochs: 202
+The MSE is:  0.4722222222222222
+000 | 034
+000 | 038
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+---------------------------------------
+For a step size of  0.01
+For Sigmoid Activation
+Number of Epochs: 202
+The MSE is:  0.5277777777777778
+034 | 000
+038 | 000
+Precision: 0.4722222222222222
+Recall: 1.0
+F1 Score: 0.6415094339622641
+
+For Tanh Activation
+Number of Epochs: 202
+The MSE is:  0.5277777777777778
+034 | 000
+038 | 000
+Precision: 0.4722222222222222
+Recall: 1.0
+F1 Score: 0.6415094339622641
+
+For ReLu Activation
+Number of Epochs: 202
+The MSE is:  0.4722222222222222
+000 | 034
+000 | 038
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+---------------------------------------
+For a step size of  0.1
+For Sigmoid Activation
+Number of Epochs: 202
+The MSE is:  0.4722222222222222
+000 | 034
+000 | 038
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+For Tanh Activation
+Number of Epochs: 202
+The MSE is:  0.4722222222222222
+000 | 034
+000 | 038
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+For ReLu Activation
+Number of Epochs: 202
+The MSE is:  0.4722222222222222
+000 | 034
+000 | 038
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+---------------------------------------
+For a step size of  1
+For Sigmoid Activation
+Number of Epochs: 202
+The MSE is:  0.4722222222222222
+000 | 034
+000 | 038
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+For Tanh Activation
+Number of Epochs: 202
+The MSE is:  0.4722222222222222
+000 | 034
+000 | 038
+Precision: 0
+Recall: 0.0
+F1 Score: 0
+
+For ReLu Activation
+Number of Epochs: 202
+The MSE is:  0.5277777777777778
+034 | 000
+038 | 000
+Precision: 0.4722222222222222
+Recall: 1.0
+F1 Score: 0.6415094339622641
+
+---------------------------------------

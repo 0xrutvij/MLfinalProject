@@ -124,7 +124,7 @@ if __name__ == '__main__':
     plots = []
 
     for fileKey in keys:
-        sys.stdout = open('../6_output/output'+ fileKey +'.txt', 'w')
+        sys.stdout = open('../6_output/ensemblesOutput/output'+ fileKey +'.txt', 'w')
 
         # Load the training data
         M = np.genfromtxt('../4_learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
@@ -174,7 +174,7 @@ if __name__ == '__main__':
         plotsBagged = []
         plotsBoosted = []
         for fold in range(8):
-            sys.stdout = open('../6_output/outputFolds/output'+ str(fold) + fileKey +'.txt', 'w')
+            sys.stdout = open('../6_output/outputStratifiedFolds/output'+ str(fold) + fileKey +'.txt', 'w')
 
             # Load the training data
             M = np.genfromtxt('../4_learningData/stratFolds/'+ str(fold) +fileKey+ 'trainFold.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)

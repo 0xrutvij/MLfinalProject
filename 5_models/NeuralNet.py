@@ -206,8 +206,6 @@ class neuralNetwork:
         # Find dE/dwi
         partial1 = (self.input.T.dot(deltahidden))/self.numOfSamples
         partial2 = (xhidden.T.dot(delta_o))/self.numOfSamples
-        partial1 = partial1 if partial1 < 5 or partial1 > -5 else 5 if partial1 > 5 else -5
-        partial2 = partial2 if partial2 < 5 or partial2 > -5 else 5 if partial2 > 5 else -5
 
         # exponential moving average
         v1 = (partial1**2)*(1-self.beta)+(v1*self.beta) # hidden layer
@@ -217,6 +215,12 @@ class neuralNetwork:
         vectorized_momentum  =np.vectorize(self.momentumTerm)
         dw1 = vectorized_momentum(v1)*partial1
         dw2 = vectorized_momentum(v2)*partial2
+
+        gradientClipper = lambda p: p if p < 5 and p > -5 else 5 if p > 5 else -5
+        vectorized_gClipper = np.vectorize(gradientClipper)
+
+        dw1 = vectorized_gClipper(dw1)
+        dw2 = vectorized_gClipper(dw2)
 
         # update weights
         output_layer_weights = output_layer_weights-dw2
@@ -266,18 +270,18 @@ if __name__ == '__main__':
 
     for fileKey in keys:
         
-        sys.stdout = open('./6_output/NNoutput'+ fileKey +'.txt', 'w')
+        sys.stdout = open('../6_output/nnOutput/NNoutput'+ fileKey +'.txt', 'w')
 
         print(fileKey)
         print("")
 
         # Load the training data
-        M = np.genfromtxt('./4_learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        M = np.genfromtxt('../4_learningData/' +fileKey+ 'train.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
         ytrain = M[:, 0]
         xtrain = M[:, 1:]
 
         # Load the test data
-        M = np.genfromtxt('./4_learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
+        M = np.genfromtxt('../4_learningData/' +fileKey+ 'test.csv', missing_values=0, skip_header=0, delimiter=',', dtype=int)
         ytest = M[:, 0]
         xtest = M[:, 1:]
 

@@ -1,0 +1,17 @@
+xGB without weighted classes, 10 estimators
+039 | 001
+000 | 254
+Precision: 1.0
+Recall: 0.975
+F1 Score: 0.9873417721518987
+Test Error = 0.34%.
+-*--*--*--*--*--*--*--*--*--*-
+xGB with the minority class weighed 10^4 times the majority class, 10 estimators
+039 | 001
+000 | 254
+Precision: 1.0
+Recall: 0.975
+F1 Score: 0.9873417721518987
+Test Error = 0.34%.
+-+--+--+--+--+--+--+--+--+--+-
+-+--+--+--+--+--+--+--+--+--+-

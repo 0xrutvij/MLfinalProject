@@ -1,6 +1,6 @@
 # MLfinalProject
 
-##Main Files in this Project
+## Main Files in this Project
 
 dataProc - This is a preliminary analysis of the data, including histograms and simple curve fitting.
 binTreeMain - An emsemble of binary decision trees implementing bagging and Adaboost.

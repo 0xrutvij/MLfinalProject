@@ -1,5 +1,7 @@
 # MLfinalProject
 
+Project Report can be found at - [Link](https://github.com/0xrutvij/MLfinalProject/blob/main/ML_Final_Report.pdf)
+
 ## Main Files in this Project
 
 dataProc - This is a preliminary analysis of the data, including histograms and simple curve fitting.
